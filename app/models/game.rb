@@ -1,0 +1,34 @@
+class Game
+
+	@@total_moves = 24
+
+	def initialize
+		@board = Board.new
+		@moves_remaining = @@total_moves
+		@state = 0 # 0=playing, 1=won, 0=lost
+	end
+
+	def make_move(color)
+		@board.flood(color)
+		@moves_remaining -= 1
+
+		determine_state
+		#if @state == 1
+		#	puts 'You won!'
+		#elsif @state == -1
+		#	puts 'You lost.'
+	end
+
+	def determine_state
+		if @board.flooded? && @moves_remaining >= 0
+			@state = 1
+		elsif @moves_remaining < 0
+			@state = -1
+		end
+	end
+
+	def print_board
+		@board.print_board
+	end
+
+end
