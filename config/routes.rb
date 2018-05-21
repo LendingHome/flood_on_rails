@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get '/game', to: 'game#index'
   get '/highscores', to: 'high_scores#index'
   get '*path', to:  'landing_page#index'
+  match '/game/update', to: 'game#update', :via => :post
+  match '/game/create', to: 'game#create', :via => :post
 end
