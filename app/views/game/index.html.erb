@@ -1,11 +1,37 @@
 
-<title> Hello! I'm the games page! </title>
+<header>
+    <title> RailsFlood | Game </title>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <a class="navbar-brand" href="/">Flood on Rails!</a>
+        <ul class="nav-container">
+            <li class="nav-item flex-item">
+                <%= link_to controller: 'landing_page' do %>
+                    <div class="btn-quiet nav-link">
+                        <span class="glyphicon glyphicon-home"></span> Home
+                    </div>
+                <% end %>
+            </li>
+            <li class="nav-item flex-item">
+                <%= link_to controller: 'game' do %>
+                    <div class="nav-link">
+                        <span class="glyphicon glyphicon-home"></span> FloodIt!
+                    </div>
+                <% end %>
+            </li>
+            <li class="nav-item flex-item">
+                <%= link_to controller: 'high_scores' do %>
+                    <div class="nav-link">
+                        <span class="glyphicon glyphicon-home"></span> High Scores
+                    </div>
+                <% end %>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
 <body>
     <div class="flex-grid">
-        <p>
-            Im a paragraph -- games
-        </p>
-
         <div class="flex-container">
             <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
 

@@ -27,28 +27,9 @@
 	outline-width: 5px;
 	outline-color: #256599;
 	outline-style: groove;
-}
 
-.game-board {
-	display: grid;
-	flex-shrink: 1;
-	outline-width: 5px;
-	outline-color: #256599;
-	outline-style: groove;
-	grid-row: 1 / span 10;
-	grid-column: 1 / span 10;
-}
-
-.flex-item-board {
-	padding: 0px;
-	width: 40px;
-	height: 40px;
-	margin-top: 0px;
-
-	line-height: 15px;
-	font-weight: bold;
-	font-size: 3em;
-	text-align: center;
+	width: 400px;
+	margin: 0 auto;
 }
 
 .flex-item-padded {
