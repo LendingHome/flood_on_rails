@@ -19,3 +19,37 @@
 body {
 	background-color: #8996a5;
 }
+
+ul {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.navbar-brand {
+	text-shadow: #8996a5;
+	font-size: 1.75rem;
+}
+
+.nav-container {
+	display: flex;
+	margin: 0px;
+	padding-left: 0px;
+}
+
+.nav-item {
+	display: flex;
+	margin-left: 0px;
+
+	border-left: 2px solid white;
+}
+
+.nav-link {
+	font-size: 1.25rem;
+	margin: 3px;
+}
+
+$theme-colors: (
+	"primary": #fecb00,
+	"secondary": #1eadc4,
+	"danger": #ff4136
+);
