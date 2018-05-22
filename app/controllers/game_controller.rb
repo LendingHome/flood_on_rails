@@ -9,6 +9,7 @@ class GameController < ApplicationController
     		Rails.cache.write("game", @game)
     		#Rails.logger.debug("new game")
     	end
+        @worst_score = HighScore.all.order(:score).last.score
     	#@board = @game.board
     	#session[:game] = @game
     	

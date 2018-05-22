@@ -8,18 +8,22 @@
    
         </p>
 
-
         <div id="modal-holder"></div>
 
         <div class="flex-container">
             <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
-            <%= button_to 'New High Score', {:controller => "high_scores", :action => "new", data: { behavior: 'modal' } } %>
 
+            <%= button_to 'Add New High Score', {:controller => "high_scores", :action => "new", :remote => :true, data: { behavior: 'modal' } } %>
 
             <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>
         </div>
+       
         <% if @game.state == 1 %>
             <p>You won!</p>
+            <% if @game.score < @worst_score %>
+                <%= button_to 'Add New High Score', {:controller => "high_scores", :action => "new", data: { behavior: 'modal' } } %>
+
+            <% end %>
         <% elsif @game.state == -1 %>
             <p>You Lost</p>
         <% else %>
@@ -39,12 +43,47 @@
             <% end %>
             
         </div>
-    </div>
-    <script>
-    function flood(color) {
 
-    }
+        <!-- Button to open the modal login form -->
+        <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+
+        <!-- The Modal -->
+        <div id="id01" class="modal">
+          <span onclick="document.getElementById('id01').style.display='none'" 
+        class="close" title="Close Modal">&times;</span>
+
+          <!-- Modal Content -->
+          <form action="/highscores" method="post">
+
+            <div class="container">
+              <label for="uname"><b>Name</b></label>
+              <input type="text" placeholder="Enter Name" name="name" required>
+
+              <label for="psw"><b>Score</b></label>
+              <input type="text" placeholder="Enter Score" name="score" required>
+
+              <button type="submit">Add</button>
+      
+            </div>
+
+          </form>
+        </div>
+
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
     </script>
+
 
     <%= form_tag game_path, remote: true do %>
     <%= hidden_field_tag :color, "color" %>

@@ -1,11 +1,11 @@
 <%= form_for(@highscore, url: {action: "create"}, html: { data: { behavior: 'modal' } } ) do |f| %>  
   <div class="field"> 
     <%= f.label :name %><br> 
-    <%= f.text_area :name %> 
+    <%= f.text_field :name %> 
   </div> 
   <div class="field"> 
     <%= f.label :score %><br> 
-    <%= f.text_area :score %> 
+    <%= f.text_field :score %> 
   </div> 
   <div class="actions"> 
     <%= f.submit "Add High Score" %> 

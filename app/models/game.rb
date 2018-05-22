@@ -4,22 +4,21 @@ class Game
 	attr_reader :board
 	attr_reader :state
 	attr_reader :moves_remaining
+	attr_reader :score
 
 	def initialize
 		@board = Board.new
 		@moves_remaining = @@total_moves
+		@score = 0
 		@state = 0 # 0=playing, 1=won, -1=lost
 	end
 
 	def make_move(color)
 		@board.flood(color)
 		@moves_remaining -= 1
-
+		@score += 1
 		determine_state
-		#if @state == 1
-		#	puts 'You won!'
-		#elsif @state == -1
-		#	puts 'You lost.'
+
 	end
 
 	def determine_state
