@@ -34,6 +34,7 @@
     <div class="flex-grid">
         <div class="flex-container">
             <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
+            <%= button_to 'New High Score', {:controller => "high_scores", :action => "new", data: { behavior: 'modal' } } %>
 
 
             <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>

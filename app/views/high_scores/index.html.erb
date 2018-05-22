@@ -34,8 +34,9 @@
             High Scores n stuff!!
         </h1>
 
-        <% @scores.each do |hs| %>
-            <p> <%= hs.name %> <%= hs.score %> </p>
-        <% end %>
-    </div>
-</body>
+    <%= button_to 'New High Score', {:controller => "high_scores", :action => "new"} %>
+
+    <% @scores.each do |hs| %>
+        <p> <%= hs.name %> <%= hs.score %> </p>
+    <% end %>
+</div>
