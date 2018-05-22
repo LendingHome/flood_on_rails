@@ -4,6 +4,8 @@
         High Scores n stuff!!
     </h1>
 
+    <%= button_to 'New High Score', {:controller => "high_scores", :action => "new"} %>
+
     <% @scores.each do |hs| %>
         <p> <%= hs.name %> <%= hs.score %> </p>
     <% end %>

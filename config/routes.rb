@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   
   match '/game/update', to: 'game#update', :via => :post
   match '/game/create', to: 'game#create', :via => :post
+   post 'highscores' => 'high_scores#create'
+  post '/highscores/new', to: 'high_scores#new'
 
   get '*path', to:  'landing_page#index'
 end
