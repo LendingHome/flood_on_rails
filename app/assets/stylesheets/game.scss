@@ -3,47 +3,71 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .flex-container {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  
-  -webkit-flex-flow: row nowrap;
-  justify-content: center;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-flex-flow: row nowrap;
+	justify-content: center;
+}
+
+.game-grid {
+	display: grid;
+	grid-template-columns: repeat(10, 40px);
+	grid-template-rows: repeat(10, 40px);
+
+	justify-content: center;
+
+	outline-width: 5px;
+	outline-color: #256599;
+	outline-style: groove;
+}
+
+.game-board {
+	display: grid;
+	flex-shrink: 1;
+	outline-width: 5px;
+	outline-color: #256599;
+	outline-style: groove;
+	grid-row: 1 / span 10;
+	grid-column: 1 / span 10;
 }
 
 .flex-item-board {
-  padding: 0px;
-  width: 40px;
-  height: 40px;
-  margin-top: 0px;
-  
-  line-height: 15px;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
+	padding: 0px;
+	width: 40px;
+	height: 40px;
+	margin-top: 0px;
+
+	line-height: 15px;
+	font-weight: bold;
+	font-size: 3em;
+	text-align: center;
 }
 
 .flex-item-padded {
-    padding: 10px;
-    margin: 10px;
-    line-height: 15px;
-    font-weight: bold;
-    text-align: center;
-  }
+	padding: 10px;
+	margin: 10px;
+	line-height: 15px;
+	font-weight: bold;
+	text-align: center;
+}
 
 .no-show {
-    border:none !important;
-    outline:none !important;
+	border: none !important;
+	outline: none !important;
+	color: transparent;
 }
 
 .board-tile {
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
+	padding: 0px;
+	margin: 0px;
 }
-

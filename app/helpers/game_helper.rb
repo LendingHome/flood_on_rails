@@ -4,7 +4,7 @@ module GameHelper
             2 => 'blue',
             3 => 'green',
             4 => 'white',
-            5 => 'black',
+            5 => 'orange',
             6 => 'purple',
         }
         colorMap[color]

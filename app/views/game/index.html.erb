@@ -1,38 +1,39 @@
 
 <title> Hello! I'm the games page! </title>
 <body>
-    <p>
-        Im a paragraph -- games
-    </p>
+    <div class="flex-grid">
+        <p>
+            Im a paragraph -- games
+        </p>
 
-    <div class="flex-container">
-        <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
+        <div class="flex-container">
+            <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
 
 
-        <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>
-    </div>
-    <% if @game.state == 1 %>
-        <p>You won!</p>
-    <% elsif @game.state == -1 %>
-        <p>You Lost</p>
-    <% else %>
+            <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>
+        </div>
+        <% if @game.state == 1 %>
+            <p>You won!</p>
+        <% elsif @game.state == -1 %>
+            <p>You Lost</p>
+        <% else %>
 
-    <% end %>
-
-    <div class="board">
-        <% @game.board.game_board.each do |x| %>
-            <div class="flex-container">
-            <% x.each do |y| %>
-                <div class="board_btn flex-item-board">
-                
-                    <%= button_to y, {:controller => "game", :action => "update", :flood_color => y}, 
-                        :method=>:PUT, :remote => :true, :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}" %>
-                </div>
-            <% end %>
-            </div>
         <% end %>
-    </div>
 
+        <div class="game-grid">
+            
+            <% @game.board.game_board.each do |x| %>
+                <% x.each do |y| %>
+                    <div class="board_btn flex-item-board item">
+                    
+                        <%= button_to y, {:controller => "game", :action => "update", :flood_color => y}, 
+                            :method=>:PUT, :remote => :true, :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}" %>
+                    </div>
+                <% end %>
+            <% end %>
+            
+        </div>
+    </div>
     <script>
     function flood(color) {
 
