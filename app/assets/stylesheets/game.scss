@@ -2,4 +2,48 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.flex-item-board {
+  padding: 0px;
+  width: 40px;
+  height: 40px;
+  margin-top: 0px;
+  
+  line-height: 15px;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+.flex-item-padded {
+    padding: 10px;
+    margin: 10px;
+    line-height: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+.no-show {
+    border:none !important;
+    outline:none !important;
+}
+
+.board-tile {
+    width: 40px;
+    height: 40px;
+}
 

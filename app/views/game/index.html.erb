@@ -1,41 +1,46 @@
 
 <title> Hello! I'm the games page! </title>
-<p>
-    Im a paragraph -- games
-</p>
+<body>
+    <p>
+        Im a paragraph -- games
+    </p>
 
-<%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true} %>
+    <div class="flex-container">
+        <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
 
 
-<p>Moves Remaining: <%= @game.moves_remaining %></p>
+        <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>
+    </div>
+    <% if @game.state == 1 %>
+        <p>You won!</p>
+    <% elsif @game.state == -1 %>
+        <p>You Lost</p>
+    <% else %>
 
-<% if @game.state == 1 %>
- 	<p>You won!</p>
-<% elsif @game.state == -1 %>
- 	<p>You Lost</p>
-<% else %>
+    <% end %>
 
-<% end %>
+    <div class="board">
+        <% @game.board.game_board.each do |x| %>
+            <div class="flex-container">
+            <% x.each do |y| %>
+                <div class="board_btn flex-item-board">
+                
+                    <%= button_to y, {:controller => "game", :action => "update", :flood_color => y}, 
+                        :method=>:PUT, :remote => :true, :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}" %>
+                </div>
+            <% end %>
+            </div>
+        <% end %>
+    </div>
 
-<div class="board">
-	<% @game.board.game_board.each do |x| %>
-	   	<% x.each do |y| %>
-	    	<div class="board_btn">
-	    	
-	    		<%= button_to y, {:controller => "game", :action => "update", :flood_color => y}, :method=>:PUT, :remote => :true %>
-	    	</div>
-	    <% end %>
+    <script>
+    function flood(color) {
 
-	<% end %>
-</div>
+    }
+    </script>
 
-<script>
-function flood(color) {
-
-}
-</script>
-
-<%= form_tag game_path, remote: true do %>
-  <%= hidden_field_tag :color, "color" %>
-<% end %>
+    <%= form_tag game_path, remote: true do %>
+    <%= hidden_field_tag :color, "color" %>
+    <% end %>
+</body>
 
