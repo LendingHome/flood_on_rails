@@ -15,7 +15,7 @@ class Game
 
 	def make_move(color)
 		if @moves_remaining > 1
-			@board.flood(color)
+			return if !@board.flood(color)
 			@moves_remaining -= 1
 			@score += 1
 			determine_state

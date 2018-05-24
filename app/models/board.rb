@@ -8,16 +8,21 @@ class Board
 	BOARD_SIZE = 10
 	NUM_COLORS = 6
 
+	@current_color = 1;
+
 	def initialize
 		@game_board = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE, 0) }
 		fill_board()
-
+		@current_color = @game_board[0][0]
 	end
 
 	# flood the board with this color
 	# assumes new_color is in [1,...,NUM_COLORS]
 	def flood(new_color)
+		return false if new_color == @current_color
+		@current_color = new_color
 		flood_helper(0, 0, @game_board[0][0], new_color)
+		true
 	end
 
 	# determine if user has won game
