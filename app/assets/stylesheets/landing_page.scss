@@ -1,3 +1,47 @@
 // Place all the styles related to the landing_page controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.title {
+	color: #fecb00;
+	font-size: 2rem;
+}
+
+.subtitle {
+	color: #e6a700;
+	font-size: 1.5rem;
+	margin-left: 5px;
+}
+
+.subsubtitle {
+	color: #1eadc4;
+	font-size: 1.25rem;
+	margin-left: 10px;
+}
+
+.text {
+	color: #f24327;
+	font-size: 1rem;
+	margin-left: 15px;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin-left: 10%;
+	justify-content: center;
+}
+
+.flex-item {
+	margin-top: 2vh;
+
+	.center {
+		justify-content: center;
+		margin-left: 0px;
+	}
+
+	.left {
+		justify-content: left;
+		margin-left: 5vw;
+	}
+}
