@@ -1,3 +1,5 @@
+require 'set'
+
 class Board
 
 	# read/write
@@ -30,7 +32,7 @@ class Board
 	end
 
 	# for testing
-	def print_board
+	def print_board()
 		@game_board.each { |x|
 			x.each { |y|
 				print "#{y} "
@@ -38,6 +40,45 @@ class Board
 			puts
 		}
 		return 
+	end
+
+	# returns the color that occurs the most on the board, other than the current color
+	def get_greedy_color()
+		color_count = Hash.new
+		0.upto(BOARD_SIZE - 1) { |x|
+			0.upto(BOARD_SIZE - 1) { |y|
+				if color_count.key?(@game_board[x][y])
+					color_count[@game_board[x][y]] = color_count[@game_board[x][y]] + 1
+				else
+					color_count[@game_board[x][y]] = 1
+				end
+			}
+		}
+		sorted_counts = color_count.sort_by { |col, count| count }
+		edge_colors = get_edge_colors
+		-1.downto(-6) { |x|
+			return sorted_counts[x][0] if sorted_counts[x][0] != @game_board[0][0] && edge_colors.include?(sorted_counts[x][0])
+		}
+
+		#return sorted_counts[-1][0] if sorted_counts[-1][0] != @game_board[0][0]
+		#sorted_counts[-2][0]
+	end
+
+	def get_edge_colors()
+		edge_colors = Set.new
+		edge_colors = get_edge_colors_helper(0, 0, @game_board[0][0], edge_colors)
+
+		#edge_colors.delete_if { |x| x.is_a?(Set) }
+		edge_colors.delete(nil)
+	end
+
+	def get_edge_colors_helper(x, y, old_color, edge_colors)
+		return @game_board[x][y] if @game_board[x][y] != old_color
+
+		#edge_colors.add(get_edge_colors_helper(x - 1, y, old_color, edge_colors)) if x - 1 >= 0
+		edge_colors.add(get_edge_colors_helper(x + 1, y, old_color, edge_colors)) if x + 1 < BOARD_SIZE
+		#edge_colors.add(get_edge_colors_helper(x, y - 1, old_color, edge_colors)) if y - 1 >= 0
+		edge_colors.add(get_edge_colors_helper(x, y + 1, old_color, edge_colors)) if y + 1 < BOARD_SIZE
 	end
 
 	private
