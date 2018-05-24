@@ -1,3 +1,66 @@
 // Place all the styles related to the computer_game controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h2 {
+	text-align: center;
+}
+
+.flex-container {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+
+.game-grid {
+	display: grid;
+	grid-template-columns: repeat(10, 5vw);
+	grid-template-rows: repeat(10, 5vw);
+	grid-row-gap: 0px;
+	grid-column-gap: 0px;
+
+	justify-content: center;
+
+	outline-width: 5px;
+	outline-color: #256599;
+	outline-style: groove;
+
+	width: 50vw;
+	height: 50vw;
+	margin: 0 auto;
+}
+
+.flex-item-padded {
+	padding: 10px;
+	margin: 10px;
+	line-height: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+.flex-item-board {
+	padding: 0px;
+	margin: 0px;
+}
+
+.no-show {
+	border: none !important;
+	outline: none !important;
+	color: transparent;
+}
+
+.board-tile {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}

@@ -17,7 +17,7 @@ class Computer_Game
 
 	def make_computer_move()
 		color = @comp_board.get_greedy_color()
-		@comp_board.flood(color)
+		@comp_board.flood(1)
 	end
 
 	def make_user_move(color)
@@ -32,15 +32,20 @@ class Computer_Game
 	
 
 	def determine_state
-		if @user_board.flooded? #&& @moves_remaining >= 0
+		user_done = @user_board.flooded?
+		comp_done = @comp_board.flooded?
+		if user_done 
 			@state = 1
-		#elsif @moves_remaining < 1
-		#	@state = -1
+		elsif comp_done
+			@state = -1
+		else
+			#@state = 0
 		end
 	end
 
 	def print_board
-		@board.print_board
+		@user_board.print_board
+		@comp_board.print_board
 	end
 
 end

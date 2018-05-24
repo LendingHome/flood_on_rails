@@ -39,16 +39,17 @@
                 <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
 
                 <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>
+                <p class="flex-item-padded" >Score: <%= @game.score %></p>
             </div>
         
             <% if @game.state == 1 %>
-                <p>You won!</p>
+                <h2>You won!</h2>
                 <% if @game.score < @worst_score %>
                     <%= javascript_tag "showForm()" %>
 
                 <% end %>
             <% elsif @game.state == -1 %>
-                <p>You Lost</p>
+                <h2>You Lost</h2>
             <% else %>
 
             <% end %>
@@ -59,8 +60,13 @@
                     <% x.each do |y| %>
                         <div class="board_btn flex-item-board item">
                         
+                            <% if @game.state == 0 %>    
                             <%= button_to(y, {:controller => "game", :action => "update", :flood_color => y},
                                 {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
+                            <% else %>
+                            <%= button_to(y, {:controller => "game", :action => "update", :flood_color => y},
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}", :disabled => true} )  %>
+                            <% end %>
                         </div>
                     <% end %>
                 <% end %>
@@ -76,13 +82,14 @@
             class="close" title="Close Modal">&times;</span>
 
             <!-- Modal Content -->
-            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>  
+            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}, :html => {:class => "modal-content"}) do |f| %> 
+                <p>Congratulations, you made a new high score!</p> 
                 <div class="field"> 
-                    <%= f.label :name %><br> 
+                    <%= f.label :name %>
                     <%= f.text_field :name %> 
                 </div> 
                 <div class="field"> 
-                    <%= f.label :score %><br> 
+                    <%= f.label :score %>
                     <%= f.text_field :score %> 
                 </div> 
                 <div class="actions"> 

@@ -33,31 +33,32 @@
 
     <div class="flex-grid">
         <div class="flex-container">
-            <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
+            <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
 
 
         </div>
        
         <% if @game.state == 1 %>
-            <p>You won!</p>
+            <h2>You won!</h2>
             <% if @game.score < @worst_score %>
                 <%= javascript_tag "showForm()" %>
 
             <% end %>
         <% elsif @game.state == -1 %>
-            <p>You Lost</p>
+            <h2>You Lost</h2>
         <% else %>
 
         <% end %>
 
         <div class="game-grid">
-            
+  
             <% @game.user_board.game_board.each do |x| %>
                 <% x.each do |y| %>
                     <div class="board_btn flex-item-board item">
                     
-                        <%= button_to y, {:controller => "computer_game", :action => "update", :flood_color => y}, 
-                            :method=>:PUT, :remote => :true, :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}" %>
+                    
+                        <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
                     </div>
                 <% end %>
             <% end %>
@@ -65,13 +66,13 @@
         </div>
 
         <div class="game-grid">
-            
+     
             <% @game.comp_board.game_board.each do |x| %>
                 <% x.each do |y| %>
                     <div class="board_btn flex-item-board item">
                     
-                        <%= button_to y, {:controller => "computer_game", :action => "update", :flood_color => y}, 
-                            :method=>:PUT, :remote => :true, :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}" %>
+                        <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
                     </div>
                 <% end %>
             <% end %>
