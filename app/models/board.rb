@@ -56,7 +56,7 @@ class Board
 		}
 		sorted_counts = color_count.sort_by { |col, count| count }
 		edge_colors = get_edge_colors
-		-1.downto(-6) { |x|
+		-1.downto(-edge_colors.size()) { |x|
 			return sorted_counts[x][0] if sorted_counts[x][0] != @game_board[0][0] && edge_colors.include?(sorted_counts[x][0])
 		}
 
@@ -66,6 +66,7 @@ class Board
 
 	def get_edge_colors()
 		edge_colors = Set.new
+		@finished_coords = []
 		edge_colors = get_edge_colors_helper(0, 0, @game_board[0][0], edge_colors)
 
 		#edge_colors.delete_if { |x| x.is_a?(Set) }
@@ -74,7 +75,9 @@ class Board
 
 	def get_edge_colors_helper(x, y, old_color, edge_colors)
 		return @game_board[x][y] if @game_board[x][y] != old_color
+		return nil if @finished_coords.include?([x,y])
 
+		@finished_coords.push([x,y])
 		#edge_colors.add(get_edge_colors_helper(x - 1, y, old_color, edge_colors)) if x - 1 >= 0
 		edge_colors.add(get_edge_colors_helper(x + 1, y, old_color, edge_colors)) if x + 1 < BOARD_SIZE
 		#edge_colors.add(get_edge_colors_helper(x, y - 1, old_color, edge_colors)) if y - 1 >= 0

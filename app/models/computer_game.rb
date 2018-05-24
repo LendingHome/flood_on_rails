@@ -17,7 +17,7 @@ class Computer_Game
 
 	def make_computer_move()
 		color = @comp_board.get_greedy_color()
-		@comp_board.flood(1)
+		@comp_board.flood(color)
 	end
 
 	def make_user_move(color)
