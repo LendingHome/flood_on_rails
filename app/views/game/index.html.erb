@@ -32,13 +32,9 @@
 <body>
     <div id="modal-holder"></div>
     <div class="content-box">
+        <br />
+        <h1 class="title center"> FloodIt!</h1>
         <div class="flex-grid">
-            <div class="flex-container">
-                <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
-
-                <p class="flex-item-padded" >Moves Remaining: <%= @game.moves_remaining %></p>
-                <p class="flex-item-padded" >Score: <%= @game.score %></p>
-            </div>
         
             <% if @game.state == 1 %>
                 <h2>You won!</h2>
@@ -63,14 +59,20 @@
                                 {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
                             <% else %>
                             <%= button_to(y, {:controller => "game", :action => "update", :flood_color => y},
-                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}", :disabled => true} )  %>
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", 
+                                    :style => "background-color:#{colorMapper(y)}", :disabled => true} )  %>
                             <% end %>
                         </div>
                     <% end %>
                 <% end %>
                 
             </div>
-
+            </div>
+            <div class="flex-container btn-group mt2">
+                <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
+                <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
+                <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </form>
+            </div>
             <!-- Button to open the modal login form -->
             <button id="highscore_button" onclick="document.getElementById('highscore_form').style.display='block'">Add High Score</button>
 
@@ -93,9 +95,7 @@
                 <div class="actions"> 
                     <%= f.submit "Add High Score" %> 
                 </div> 
-                <% end %>
-            </div>
-
+            <% end %>
         </div>
     </div>
     <script>

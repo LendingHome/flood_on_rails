@@ -32,13 +32,15 @@
 	justify-content: center;
 }
 
+.center {
+	justify-content: center;
+	text-align: center;
+	margin-left: 0px;
+	margin-bottom: 5vh;
+}
+
 .flex-item {
 	margin-top: 2vh;
-
-	.center {
-		justify-content: center;
-		margin-left: 0px;
-	}
 
 	.left {
 		justify-content: left;
