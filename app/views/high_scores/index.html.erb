@@ -29,14 +29,16 @@
 
 </header>
 <body>
-    <div align='center'>
-        <h1>
-            High Scores n stuff!!
-        </h1>
+    <div class="content-box">
+        <div align='center'>
+            <h1>
+                High Scores n stuff!!
+            </h1>
 
-    <%= button_to 'New High Score', {:controller => "high_scores", :action => "new"} %>
+        <%= button_to 'New High Score', {:controller => "high_scores", :action => "new"} %>
 
-    <% @scores.each do |hs| %>
-        <p> <%= hs.name %> <%= hs.score %> </p>
-    <% end %>
+        <% @scores.each do |hs| %>
+            <p> <%= hs.name %> <%= hs.score %> </p>
+        <% end %>
+    </div>
 </div>

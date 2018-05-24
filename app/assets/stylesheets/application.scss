@@ -37,8 +37,10 @@ ul {
 }
 
 .navbar-brand {
-	text-shadow: #8996a5;
+	text-shadow: 1px 1px #8996a5;
 	font-size: 1.75rem;
+	padding-left: 2%;
+	color: #e6a700;
 }
 
 .nav-container {
@@ -50,13 +52,18 @@ ul {
 .nav-item {
 	display: flex;
 	margin-left: 0px;
-
 	border-left: 2px solid white;
 }
 
 .nav-link {
 	font-size: 1.25rem;
 	margin: 3px;
+	color: #e6a700;
+}
+
+.tight {
+	margin: 0px;
+	padding: 0px;
 }
 
 $theme-colors: (
