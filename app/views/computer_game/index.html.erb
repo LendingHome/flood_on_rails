@@ -1,0 +1,86 @@
+<header>
+    <title> RailsFlood | Game </title>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <a class="navbar-brand" href="/">Flood on Rails!</a>
+        <ul class="nav-container">
+            <li class="nav-item flex-item">
+                <%= link_to controller: 'landing_page' do %>
+                    <div class="btn-quiet nav-link">
+                        <span class="glyphicon glyphicon-home"></span> Home
+                    </div>
+                <% end %>
+            </li>
+            <li class="nav-item flex-item">
+                <%= link_to controller: 'game' do %>
+                    <div class="nav-link">
+                        <span class="glyphicon glyphicon-home"></span> FloodIt!
+                    </div>
+                <% end %>
+            </li>
+            <li class="nav-item flex-item">
+                <%= link_to controller: 'high_scores' do %>
+                    <div class="nav-link">
+                        <span class="glyphicon glyphicon-home"></span> High Scores
+                    </div>
+                <% end %>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+<body>
+
+    <div class="flex-grid">
+        <div class="flex-container">
+            <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
+
+
+        </div>
+       
+        <% if @game.state == 1 %>
+            <h2>You won!</h2>
+            <% if @game.score < @worst_score %>
+                <%= javascript_tag "showForm()" %>
+
+            <% end %>
+        <% elsif @game.state == -1 %>
+            <h2>You Lost</h2>
+        <% else %>
+
+        <% end %>
+
+        <div class="game-grid">
+  
+            <% @game.user_board.game_board.each do |x| %>
+                <% x.each do |y| %>
+                    <div class="board_btn flex-item-board item">
+                    
+                    
+                        <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
+                    </div>
+                <% end %>
+            <% end %>
+            
+        </div>
+
+        <div class="game-grid">
+     
+            <% @game.comp_board.game_board.each do |x| %>
+                <% x.each do |y| %>
+                    <div class="board_btn flex-item-board item">
+                    
+                        <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
+                    </div>
+                <% end %>
+            <% end %>
+            
+        </div>
+
+    
+
+  
+</body>
+
