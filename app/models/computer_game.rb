@@ -4,6 +4,7 @@ class Computer_Game
 	attr_reader :user_board
 	attr_reader :comp_board
 	attr_reader :state
+	#attr_reader :greedy_color
 	#attr_reader :moves_remaining
 	#attr_reader :score
 
@@ -17,7 +18,8 @@ class Computer_Game
 
 	def make_computer_move()
 		color = @comp_board.get_greedy_color()
-		@comp_board.flood(1)
+		#@greedy_color = color
+		@comp_board.flood(color)
 	end
 
 	def make_user_move(color)
@@ -45,6 +47,7 @@ class Computer_Game
 
 	def print_board
 		@user_board.print_board
+		puts
 		@comp_board.print_board
 	end
 
