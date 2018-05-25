@@ -9,7 +9,7 @@ class Game
 	def initialize
 		@board = Board.new
 		@moves_remaining = @@total_moves
-		@score = 0
+		@score = 1000
 		@state = 0 # 0=playing, 1=won, -1=lost
 	end
 
@@ -17,7 +17,7 @@ class Game
 		if @moves_remaining > 1
 			return if !@board.flood(color)
 			@moves_remaining -= 1
-			@score += 1
+			@score -= 38
 			determine_state
 		end
 

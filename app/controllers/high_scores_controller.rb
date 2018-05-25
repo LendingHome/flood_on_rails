@@ -1,7 +1,7 @@
 class HighScoresController < ApplicationController
     
     def index
-        @scores = HighScore.all.order(:score)
+        @scores = HighScore.all.order(:score).reverse_order
     end
 
     def new
@@ -12,7 +12,7 @@ class HighScoresController < ApplicationController
     def create
     	@highscore = HighScore.new(highscore_params)
     	# maintain top 10 high scores
-    	HighScore.order(:score).last.destroy if HighScore.count > 9
+    	HighScore.order(:score).reverse_order.last.destroy if HighScore.count > 9
     	if @highscore.save
     		redirect_to '/highscores'
     	else

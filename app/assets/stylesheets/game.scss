@@ -63,19 +63,23 @@
 }
 
 div.btn-group {
-	margin: 0 auto;
+	margin: 0 -5px auto;
 	margin-top: 2vh;
 	text-align: center;
 	width: inherit;
-	display: inline-block;
 	justify-content: center;
 }
 
 .btn-format {
 	display: inline-block;
-	height: 8vh;
 	vertical-align: middle;
 	font-size: 1.25rem;
+
+	form {
+		border-right: 2px;
+		margin-right: -2px;
+		border-color: white;
+	}
 }
 
 .full-size {
@@ -101,10 +105,13 @@ div.btn-group {
 	margin: 0 auto;
 	vertical-align: middle;
 	padding: 0%;
+	border: none;
 }
 
-.vertical-center {
+.v-center {
 	vertical-align: middle;
+	border: 0;
+	padding: 0;
 }
 
 .modal {
