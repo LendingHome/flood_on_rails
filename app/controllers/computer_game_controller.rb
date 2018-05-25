@@ -24,8 +24,12 @@ class ComputerGameController < ApplicationController
 
     def update
     	@color = params[:flood_color]
+
     	#@game = Game.new(session[:game])
     	@game = Rails.cache.read("computergame")
+    	#Rails.logger.debug(@game.user_board.game_board).inspect
+    	#Rails.logger.debug(@game.comp_board.game_board).inspect
+    	#Rails.logger.debug(@game.greedy_color)
     	#@board = @game.board
     	@game.make_user_move(@color.to_i)
     	#@board = @game.board

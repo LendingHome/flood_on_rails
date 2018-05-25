@@ -59,9 +59,10 @@ class Board
 				end
 			}
 		}
+
 		sorted_counts = color_count.sort_by { |col, count| count }
 		edge_colors = get_edge_colors
-		-1.downto(-edge_colors.size()) { |x|
+		-1.downto(-6) { |x|
 			return sorted_counts[x][0] if sorted_counts[x][0] != @game_board[0][0] && edge_colors.include?(sorted_counts[x][0])
 		}
 
