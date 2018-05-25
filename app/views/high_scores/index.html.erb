@@ -30,15 +30,16 @@
 
 <body>
     <div class="content-box">
+    <br />
         <div align='center'>
-            <h1>
-                High Scores n stuff!!
+            <h1 class="title">
+                High Scores!
             </h1>
-
-        <%= button_to 'New High Score', {:controller => "high_scores", :action => "new"} %>
-
+        <div class="scores-grid mt2">
         <% @scores.each do |hs| %>
-            <p> <%= hs.name %> <%= hs.score %> </p>
+            <p class="score-item"> <%= hs.name %> </p>
+            <p class="score-item"> <%= hs.score %> </p>
         <% end %>
+        </div>
     </div>
 </div>
