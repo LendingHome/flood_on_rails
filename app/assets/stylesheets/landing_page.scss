@@ -36,7 +36,12 @@
 	justify-content: center;
 	text-align: center;
 	margin-left: 0px;
-	margin-bottom: 5vh;
+	margin-right: 0px;
+	margin-bottom: 8px;
+}
+
+.no-stretch {
+	object-fit: none;
 }
 
 .flex-item {

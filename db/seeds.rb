@@ -2,43 +2,43 @@ HighScore.destroy_all
 
 HighScore.create!([
     {
-        name: "ABC",
-        score: 1 
+        name: "Nomura",
+        score: 0 
     },
     {
         name: "Fred",
-        score: 2 
+        score: 0
     },
     {
         name: "Greg",
-        score: 3 
+        score: 0 
     },
     {
         name: "Tim",
-        score: 4 
+        score: 0
     },
     {
         name: "Bella",
-        score: 5 
+        score: 0
     },
     {
         name: "Jessica",
-        score: 6 
+        score: 0
     },
     {
         name: "Tiffany",
-        score: 7 
+        score: 0 
     },
     {
         name: "Squeeps",
-        score: 8 
+        score: 0
     },
     {
         name: "Lending",
-        score: 9 
+        score: 2
     },
     {
         name: "Home",
-        score: 10 
+        score: 1 
     },
 ])

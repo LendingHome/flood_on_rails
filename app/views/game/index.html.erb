@@ -54,8 +54,8 @@
                     <%= f.text_field :name %> 
                 </div> 
                 <div class="field"> 
-                    <%= f.label :score %>
-                    <%= f.text_field :score, {:value => @game.score, :disabled => "disabled"} %> 
+                    <p> Score: <%= @game.score =%> </p>
+                    <%= f.text_field :score, {:value => @game.score, :hidden => "hidden"} %> 
                 </div>            
             </div>
             <div class="modal-footer">
@@ -73,9 +73,9 @@
         <h1 class="title center"> FloodIt!</h1>
         <div class="flex-grid">
         
-            <% if @game.state == 1 || true %>
+            <% if @game.state == 1 %>
                 <h2>You won!</h2>
-                <% if @game.score > @worst_score || true %>
+                <% if @game.score > @worst_score %>
                     <%= javascript_tag "showForm()" %>
 
                 <% end %>
