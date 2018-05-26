@@ -37,37 +37,7 @@
 
 
 <body>
-    <!-- Modal Holder -->
-    <div id="highscore_form" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">New High Score!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" onclick="document.getElementById('highscore_form').style.display='none'">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="field"> 
-                    <%= f.label :name %>
-                    <%= f.text_field :name %> 
-                </div> 
-                <div class="field"> 
-                    <p> Score: <%= @game.score =%> </p>
-                    <%= f.text_field :score, {:value => @game.score, :hidden => "hidden"} %> 
-                </div>            
-            </div>
-            <div class="modal-footer">
-                <div class="actions"> 
-                    <%= f.submit "Add High Score", :class => "btn btn-primary" %> 
-                </div> 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            </div>
-            <% end %>
-        </div>
-    </div>
+
     <div class="content-box">
         <br />
         <h1 class="title center"> FloodIt!</h1>
@@ -75,7 +45,7 @@
         
             <% if @game.state == 1 %>
                 <h2>You won!</h2>
-                <% if @game.score > @worst_score %>
+                <% if @game.score < @worst_score %>
                     <%= javascript_tag "showForm()" %>
 
                 <% end %>
@@ -106,17 +76,39 @@
             </div>
             </div>
             <div class="flex-container btn-group mt2">
-                <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format" %>
+                <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </form>
             </div>
             <!-- Button to open the modal login form -->
             <button id="highscore_button" onclick="document.getElementById('highscore_form').style.display='block'">Add High Score</button>
+
+            <!-- The Modal -->
+            <div id="highscore_form" class="modal">
+            <span onclick="document.getElementById('highscore_form').style.display='none'" 
+            class="close" title="Close Modal">&times;</span>
+
+            <!-- Modal Content -->
+            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}, :html => {:class => "modal-content"}) do |f| %> 
+                <p>Congratulations, you made a new high score!</p> 
+                <div class="field"> 
+                    <%= f.label :name %>
+                    <%= f.text_field :name %> 
+                </div> 
+                <div class="field"> 
+                    <%= f.label :score %>
+                    <%= f.text_field :score %> 
+                </div> 
+                <div class="actions"> 
+                    <%= f.submit "Add High Score" %> 
+                </div> 
+            <% end %>
         </div>
     </div>
     <script>
         // Hide the high score button
         document.getElementById('highscore_button').style.visibility = 'hidden';
+
         // Get the modal
         var modal = document.getElementById('highscore_form');
 
@@ -130,7 +122,6 @@
         // Simulate clicking the high score button
         function showForm() {
             document.getElementById("highscore_button").click();
-            console.log("won");
         }
 
     </script>

@@ -2,10 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h2 {
-	text-align: center;
-}
-
 .flex-container {
 	padding: 0;
 	margin: 0;
@@ -22,10 +18,10 @@ h2 {
 	justify-content: center;
 }
 
-.game-grid {
+.game-grid-comp {
 	display: grid;
-	grid-template-columns: repeat(10, 5vw);
-	grid-template-rows: repeat(10, 5vw);
+	grid-template-columns: repeat(10, 3.7vw);
+	grid-template-rows: repeat(10, 3.7vw);
 	grid-row-gap: 0px;
 	grid-column-gap: 0px;
 
@@ -35,8 +31,8 @@ h2 {
 	outline-color: #256599;
 	outline-style: groove;
 
-	width: 50vw;
-	height: 50vw;
+	width: 37vw;
+	height: 37vw;
 	margin: 0 auto;
 }
 
@@ -47,9 +43,15 @@ h2 {
 	font-weight: bold;
 	text-align: center;
 }
+
 .flex-item-board {
 	padding: 0px;
 	margin: 0px;
+}
+
+.flex-item-comp {
+	margin: 20px;
+
 }
 
 .no-show {
@@ -65,6 +67,51 @@ h2 {
 	margin: 0px;
 }
 
-#wrapper {
+div.btn-group {
 	margin: 0 auto;
+	margin-top: 2vh;
+	text-align: center;
+	width: inherit;
+	display: inline-block;
+	justify-content: center;
+}
+
+.btn-format {
+	display: inline-block;
+	height: 8vh;
+	vertical-align: middle;
+	font-size: 1.25rem;
+}
+
+.full-size {
+	width: 100%;
+	height: 100%;
+	padding: 0%;
+	margin: 0%;
+}
+
+.no-back {
+	background-color: transparent;
+	outline: none;
+	border: none;
+}
+
+.mt2 {
+	margin-top: 5%;
+}
+
+.btn-text {
+	font-size: 1.25rem;
+	color: white;
+	margin: 0 auto;
+	vertical-align: middle;
+	padding: 0%;
+}
+
+.vertical-center {
+	vertical-align: middle;
+}
+
+h2, h4 {
+	text-align: center;
 }

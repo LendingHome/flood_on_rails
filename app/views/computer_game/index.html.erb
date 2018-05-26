@@ -37,65 +37,78 @@
 
 <body>
 
-    <div class="flex-grid">
-        <div class="flex-container">
-            <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "flex-item-padded" %>
+    <div class="content-box">
 
+        <div class="flex-grid">
+           
+            <% if @game.state == 1 %>
+                <h2>You won!</h2>
 
-        </div>
-       
-        <% if @game.state == 1 %>
-            <h2>You won!</h2>
+            <% elsif @game.state == -1 %>
+                <h2>You Lost</h2>
+            <% else %>
 
-        <% elsif @game.state == -1 %>
-            <h2>You Lost</h2>
-        <% else %>
-
-        <% end %>
-
-        <div id="wrapper">
-
-            <div class="game-grid" id = "left-game">
-  
-            <% @game.user_board.game_board.each do |x| %>
-                <% x.each do |y| %>
-                    <div class="board_btn flex-item-board item">
-                    
-                        <% if @game.state == 0 %>    
-                    
-                            <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
-                                    {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
-
-                        <% else %>
-
-                            <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
-                                    {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}", :disabled => true } )  %>
-
-                        <% end %>
-
-                    </div>
-                <% end %>
             <% end %>
+
+            <div class="flex-container">
+
+                <div class = "flex-item-comp">
+
+                    <h4 class="title center">Your Board</h4>
+
+                    <div class="game-grid-comp">
+          
+                        <% @game.user_board.game_board.each do |x| %>
+                            <% x.each do |y| %>
+                                <div class="board_btn flex-item-board item">
+                                
+                                    <% if @game.state == 0 %>    
+                                
+                                        <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
+
+                                    <% else %> <!-- disable button clicks -->
+
+                                        <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}", :disabled => true } )  %>
+
+                                    <% end %>
+
+                                </div>
+                            <% end %>
+                        <% end %>
+                    
+                    </div>
+                </div>
+
+                <div class = "flex-item-comp">
+
+                    <h4 class="title center">Computer</h4>
+
+                    <div class="game-grid-comp">
+             
+                        <% @game.comp_board.game_board.each do |x| %>
+                            <% x.each do |y| %>
+                                <div class="board_btn flex-item-board item">
+                                
+                                    <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
+                                            {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}", :disabled => true} )  %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="flex-container mt2">
+                <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
+
+            </div>
             
-            </div>
-
-            <div class="game-grid" id="right-game">
-     
-                <% @game.comp_board.game_board.each do |x| %>
-                    <% x.each do |y| %>
-                        <div class="board_btn flex-item-board item">
-                        
-                            <%= button_to(y, {:controller => "computer_game", :action => "update", :flood_color => y},
-                                    {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}", :disabled => true} )  %>
-                        </div>
-                    <% end %>
-                <% end %>
-            </div>
-
         </div>
 
-        
-
-        
+        </div>
+    </div>
 </body>
 
