@@ -38,19 +38,50 @@
 
 <body>
 
+    <div id="highscore_form" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New High Score!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" onclick="document.getElementById('highscore_form').style.display='none'">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="field"> 
+                    <%= f.label :name %>
+                    <%= f.text_field :name %> 
+                </div> 
+                <div class="field"> 
+                    <p> Score: <%= @game.score %> </p>
+                    <%= f.text_field :score, {:value => @game.score, :hidden => "hideen"} %> 
+                </div>            
+            </div>
+            <div class="modal-footer">
+                <div class="actions"> 
+                    <%= f.submit "Add High Score", :class => "btn btn-primary" %> 
+                </div> 
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+
     <div class="content-box">
         <br />
         <h1 class="title center"> FloodIt!</h1>
         <div class="flex-grid">
         
             <% if @game.state == 1 %>
-                <h2>You won!</h2>
-                <% if @game.score < @worst_score %>
+                <h2 class="subtitle tight">You won!</h2>
+                <% if @game.score > @worst_score %>
                     <%= javascript_tag "showForm()" %>
 
                 <% end %>
             <% elsif @game.state == -1 %>
-                <h2>You Lost</h2>
+                <h2 class="subtitle tight">You Lost</h2>
             <% else %>
 
             <% end %>
@@ -82,27 +113,6 @@
             </div>
             <!-- Button to open the modal login form -->
             <button id="highscore_button" onclick="document.getElementById('highscore_form').style.display='block'">Add High Score</button>
-
-            <!-- The Modal -->
-            <div id="highscore_form" class="modal">
-            <span onclick="document.getElementById('highscore_form').style.display='none'" 
-            class="close" title="Close Modal">&times;</span>
-
-            <!-- Modal Content -->
-            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}, :html => {:class => "modal-content"}) do |f| %> 
-                <p>Congratulations, you made a new high score!</p> 
-                <div class="field"> 
-                    <%= f.label :name %>
-                    <%= f.text_field :name %> 
-                </div> 
-                <div class="field"> 
-                    <%= f.label :score %>
-                    <%= f.text_field :score %> 
-                </div> 
-                <div class="actions"> 
-                    <%= f.submit "Add High Score" %> 
-                </div> 
-            <% end %>
         </div>
     </div>
     <script>
