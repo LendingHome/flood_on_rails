@@ -68,10 +68,11 @@ div.btn-group {
 	text-align: center;
 	width: inherit;
 	justify-content: center;
+	align-content: center;
 }
 
 .btn-format {
-	display: inline-block;
+	display: inline-flex;
 	vertical-align: middle;
 	font-size: 1.25rem;
 
