@@ -24,7 +24,7 @@
 
                     <h4 class="title center">Your Board</h4>
 
-                    <div class="game-grid-comp">
+                    <div class="game-grid-comp-medium" id="game_grid_comp_u">
           
                         <% @game.user_board.game_board.each do |x| %>
                             <% x.each do |y| %>
@@ -53,7 +53,7 @@
 
                     <h4 class="title center">Computer</h4>
 
-                    <div class="game-grid-comp">
+                    <div class="game-grid-comp-medium" id="game_grid_comp_c">
              
                         <% @game.comp_board.game_board.each do |x| %>
                             <% x.each do |y| %>
@@ -69,14 +69,57 @@
                 
             </div>
 
-            <div class="flex-container mt2">
-                <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
-
-            </div>
+            
             
         </div>
 
+        <div class="flex-container btn-group mt2">
+                <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
+
+                <%= form_tag({:controller => "computer_game", :action => "create",:method => :PUT, :remote => :true}, {:id => "size_form", :class => "btn btn-secondary btn-format"}) do %>
+                <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
+                <%= submit_tag "Submit", :style => "display: none;"%>
+                <% end %>
+
+            </div>
+
         </div>
     </div>
+
+    <script>
+        // Set select size value
+        var size = "<%= escape_javascript @game.size %>";
+        if (size === "") {
+            size = "Medium"
+        }
+        document.getElementById('size').value = size;
+
+        // Set board display
+        var board_u = document.getElementById('game_grid_comp_u');
+        var board_c = document.getElementById('game_grid_comp_c');
+        switch(size) {
+            case "Small":
+                board_u.className = "game-grid-comp-small";
+                board_c.className = "game-grid-comp-small";
+                break;
+            case "Medium":
+                board_u.className = "game-grid-comp-medium";
+                board_c.className = "game-grid-comp-medium";
+                break;
+            case "Large":
+                board_u.className = "game-grid-comp-large";
+                board_c.className = "game-grid-comp-large";
+                break;
+            default:
+                board_u.className = "game-grid-comp-medium";
+                board_c.className = "game-grid-comp-medium";
+        }
+
+        function change_size() {
+            document.getElementById("size_form").submit();
+        }
+
+    </script>
+
 </body>
 

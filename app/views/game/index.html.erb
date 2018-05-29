@@ -54,7 +54,7 @@
 
             <% end %>
 
-            <div class="game-grid">
+            <div class="game-grid-medium" id="game_grid">
                 
                 <% @game.board.game_board.each do |x| %>
                     <% x.each do |y| %>
@@ -76,6 +76,12 @@
             </div>
             <div class="flex-container btn-group mt2">
                 <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
+                
+                <%= form_tag({:controller => "game", :action => "create",:method => :PUT, :remote => :true}, {:id => "size_form", :class=> "btn btn-secondary btn-format"}) do %>
+                <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
+                <%= submit_tag "Submit", :style => "display: none;"%>
+                <% end %>
+                
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </form>
             </div>
@@ -84,6 +90,29 @@
         </div>
     </div>
     <script>
+        // Set select size value
+        var size = "<%= escape_javascript @game.size %>";
+        if (size === "") {
+            size = "Medium"
+        }
+        document.getElementById('size').value = size;
+
+        // Set board display
+        var board = document.getElementById('game_grid');
+        switch(size) {
+            case "Small":
+                board.className = "game-grid-small";
+                break;
+            case "Medium":
+                board.className = "game-grid-medium";
+                break;
+            case "Large":
+                board.className = "game-grid-large";
+                break;
+            default:
+                board.className = "game-grid-medium";
+        }
+
         // Hide the high score button
         document.getElementById('highscore_button').style.visibility = 'hidden';
 
@@ -100,6 +129,10 @@
         // Simulate clicking the high score button
         function showForm() {
             document.getElementById("highscore_button").click();
+        }
+
+        function change_size() {
+            document.getElementById("size_form").submit();
         }
 
     </script>
