@@ -18,7 +18,25 @@
 	justify-content: center;
 }
 
-.game-grid-comp {
+.game-grid-comp-small {
+	display: grid;
+	grid-template-columns: repeat(6, 6vw);
+	grid-template-rows: repeat(6, 6vw);
+	grid-row-gap: 0px;
+	grid-column-gap: 0px;
+
+	justify-content: center;
+
+	outline-width: 5px;
+	outline-color: #256599;
+	outline-style: groove;
+
+	width: 36vw;
+	height: 36vw;
+	margin: 0 auto;
+}
+
+.game-grid-comp-medium {
 	display: grid;
 	grid-template-columns: repeat(10, 3.7vw);
 	grid-template-rows: repeat(10, 3.7vw);
@@ -33,6 +51,24 @@
 
 	width: 37vw;
 	height: 37vw;
+	margin: 0 auto;
+}
+
+.game-grid-comp-large {
+	display: grid;
+	grid-template-columns: repeat(14, 2.8vw);
+	grid-template-rows: repeat(14, 2.8vw);
+	grid-row-gap: 0px;
+	grid-column-gap: 0px;
+
+	justify-content: center;
+
+	outline-width: 5px;
+	outline-color: #256599;
+	outline-style: groove;
+
+	width: 39.2vw;
+	height: 39.2vw;
 	margin: 0 auto;
 }
 
@@ -110,6 +146,11 @@ div.btn-group {
 
 .vertical-center {
 	vertical-align: middle;
+}
+
+#size {
+	height: 100%;
+	width: 100%;
 }
 
 h2, h4 {

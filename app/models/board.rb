@@ -5,13 +5,26 @@ class Board
 	# read/write
 	attr_accessor :game_board
 
-	BOARD_SIZE = 10
+	#BOARD_SIZE = 10
+	SMALL_BOARD_SIZE = 6
+	MEDIUM_BOARD_SIZE = 10
+	LARGE_BOARD_SIZE = 14
 	NUM_COLORS = 6
 
 	@current_color = 1;
 
-	def initialize
-		@game_board = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE, 0) }
+	def initialize(size)
+		case size
+		when 'Small'
+			@board_size = SMALL_BOARD_SIZE
+		when 'Medium'
+			@board_size = MEDIUM_BOARD_SIZE
+		when 'Large'
+			@board_size = LARGE_BOARD_SIZE
+		else
+			@board_size = MEDIUM_BOARD_SIZE
+		end
+		@game_board = Array.new(@board_size) { Array.new(@board_size, 0) }
 		fill_board()
 		@current_color = @game_board[0][0]
 	end
@@ -28,8 +41,8 @@ class Board
 	# determine if user has won game
 	def flooded?
 		color = @game_board[0][0]
-		0.upto(BOARD_SIZE - 1) { |x|
-			0.upto(BOARD_SIZE - 1) { |y|
+		0.upto(@board_size - 1) { |x|
+			0.upto(@board_size - 1) { |y|
 				return false if @game_board[x][y] != color
 			}
 		}
@@ -50,8 +63,8 @@ class Board
 	# returns the color that occurs the most on the board, other than the current color
 	def get_greedy_color()
 		color_count = Hash.new
-		0.upto(BOARD_SIZE - 1) { |x|
-			0.upto(BOARD_SIZE - 1) { |y|
+		0.upto(@board_size - 1) { |x|
+			0.upto(@board_size - 1) { |y|
 				if color_count.key?(@game_board[x][y])
 					color_count[@game_board[x][y]] = color_count[@game_board[x][y]] + 1
 				else
@@ -85,16 +98,16 @@ class Board
 
 		@finished_coords.push([x,y])
 		#edge_colors.add(get_edge_colors_helper(x - 1, y, old_color, edge_colors)) if x - 1 >= 0
-		edge_colors.add(get_edge_colors_helper(x + 1, y, old_color, edge_colors)) if x + 1 < BOARD_SIZE
+		edge_colors.add(get_edge_colors_helper(x + 1, y, old_color, edge_colors)) if x + 1 < @board_size
 		#edge_colors.add(get_edge_colors_helper(x, y - 1, old_color, edge_colors)) if y - 1 >= 0
-		edge_colors.add(get_edge_colors_helper(x, y + 1, old_color, edge_colors)) if y + 1 < BOARD_SIZE
+		edge_colors.add(get_edge_colors_helper(x, y + 1, old_color, edge_colors)) if y + 1 < @board_size
 	end
 
 	private
 
 	def fill_board
-		0.upto(BOARD_SIZE - 1) { |x|
-			0.upto(BOARD_SIZE - 1) { |y|
+		0.upto(@board_size - 1) { |x|
+			0.upto(@board_size - 1) { |y|
 				# initialize with random colors
 				@game_board[x][y] = Random.rand(1..NUM_COLORS)
 			}
@@ -108,9 +121,9 @@ class Board
 
 		@game_board[x][y] = new_color
 		flood_helper(x - 1, y, old_color, new_color) if x - 1 >= 0
-		flood_helper(x + 1, y, old_color, new_color) if x + 1 < BOARD_SIZE
+		flood_helper(x + 1, y, old_color, new_color) if x + 1 < @board_size
 		flood_helper(x, y - 1, old_color, new_color) if y - 1 >= 0
-		flood_helper(x, y + 1, old_color, new_color) if y + 1 < BOARD_SIZE
+		flood_helper(x, y + 1, old_color, new_color) if y + 1 < @board_size
 	end
 
 end

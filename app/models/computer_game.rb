@@ -4,16 +4,19 @@ class Computer_Game
 	attr_reader :user_board
 	attr_reader :comp_board
 	attr_reader :state
+	attr_reader :size
 	#attr_reader :greedy_color
 	#attr_reader :moves_remaining
 	#attr_reader :score
 
-	def initialize
-		@user_board = Board.new
+	def initialize(size)
+		# TODO: change
+		@user_board = Board.new(size)
 		@comp_board = Marshal.load(Marshal.dump(@user_board))
 		#@moves_remaining = @@total_moves
 		#@score = 0
 		@state = 0 # 0=playing, 1=won, -1=lost
+		@size = size
 	end
 
 	def make_computer_move()

@@ -6,7 +6,6 @@ class HighScoresController < ApplicationController
 
     def new
     	@highscore = HighScore.new
-    	#render layout: 'modal'
     end
 
     def create
