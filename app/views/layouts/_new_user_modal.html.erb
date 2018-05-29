@@ -1,6 +1,6 @@
 <div id="new_user_form" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <%= form_for(@user, url: {controller: "users", action: "create"}) do |f| %>
+        <%= form_for(:user, url: {controller: "users", action: "create"}) do |f| %>
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Sign Up</h5>
