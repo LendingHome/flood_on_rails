@@ -9,19 +9,20 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class="field"> 
-                <%= f.label :username %>
-                <%= f.text_field :username, placeholder: "User Name" %> 
-            </div> 
-            <div class="field"> 
-                <%= f.label :email%>
-                <%= f.email_field :email, placeholder: "Email Address" %> 
-            </div> 
-            <div class="field"> 
-                <%= f.label :password %>
-                <%= f.password_field :password, placeholder: "Password" %>
-            </div> 
-        
+            <form>
+                <div class="field form-group"> 
+                    <%= f.label :username %>
+                    <%= f.text_field :username, placeholder: "User Name", class: "form-control" %> 
+                </div> 
+                <div class="field form-group"> 
+                    <%= f.label :email%>
+                    <%= f.email_field :email, placeholder: "Email Address", class: "form-control" %> 
+                </div> 
+                <div class="field form-group"> 
+                    <%= f.label :password %>
+                    <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+                </div> 
+            </form>
         </div>
         <div class="modal-footer">
             <div class="actions"> 

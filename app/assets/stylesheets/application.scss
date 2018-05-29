@@ -83,8 +83,10 @@ ul {
 .user-control {
 	display: flex;
 	justify-content: right;
-	align-content: center;
+	align-items: center;
 	float: right;
+	flex-flow: row nowrap;
+	margin: 0;
 }
 
 .login-entry {
@@ -92,8 +94,13 @@ ul {
 	margin: 10px;
 }
 
+.form-group {
+	text-align: left;
+}
+
 .nav-li {
 	list-style-type: none;
+	align-items: center;
 }
 
 .dropdown-menu {

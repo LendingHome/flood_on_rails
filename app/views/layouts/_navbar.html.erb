@@ -31,10 +31,15 @@
         </li>
     </ul>
     <ul class="user-control mr-4">
-        <li class="nav-li">
-            <% if current_user %>
+        <% if current_user %>
+            <li class="nav-li">
+                <p class="subsubtitle tight no-flex mr-4">Welcome <%= current_user.username %> </p>
+            </li>
+            <li class="nav-li">
                 <%= link_to "Log Out", logout_path, method: 'delete', class: "btn btn-secondary" %> 
-            <% else %>
+            </li>
+        <% else %>
+            <li class="nav-li">
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-secondary no-flex" data-toggle="dropdown">
                             Login
@@ -57,8 +62,9 @@
                         <% end %>
                     </div>
                 </div>
-            <% end %>
-        </li>
+            </li>
+        <% end %>
+        
     </ul>
 </nav>
 <%= render "layouts/new_user_modal" %>
