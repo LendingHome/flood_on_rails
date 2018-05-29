@@ -87,7 +87,6 @@
 
 .flex-item-comp {
 	margin: 20px;
-
 }
 
 .no-show {
@@ -108,12 +107,12 @@ div.btn-group {
 	margin-top: 2vh;
 	text-align: center;
 	width: inherit;
-	display: inline-block;
+	display: inline-flex;
 	justify-content: center;
 }
 
 .btn-format {
-	display: inline-block;
+	display: inline-flex;
 	height: 8vh;
 	vertical-align: middle;
 	font-size: 1.25rem;
@@ -153,6 +152,7 @@ div.btn-group {
 	width: 100%;
 }
 
-h2, h4 {
+h2,
+h4 {
 	text-align: center;
 }
