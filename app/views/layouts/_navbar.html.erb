@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="/">Flood on Rails!</a>
+    <ul class="nav-container mr-auto">
+        <li class="nav-item flex-item tight">
+            <%= link_to controller: "landing_page" do %>
+                <div class="btn-quiet nav-link">
+                    <i class="fas fa-home"></i> Home
+                </div>
+            <% end %>
+        </li>
+        <li class="nav-item flex-item tight">
+            <%= link_to controller: "game" do %>
+                <div class="nav-link">
+                    <i class="fas fa-th"></i> FloodIt!
+                </div>
+            <% end %>
+        </li>
+        <li class="nav-item flex-item tight">
+            <%= link_to controller: "computer_game" do %>
+                <div class="nav-link">
+                    <i class="fas fa-desktop"></i> Play Computer
+                </div>
+            <% end %>
+        </li>
+        <li class="nav-item flex-item tight">
+            <%= link_to controller: "high_scores" do %>
+                <div class="nav-link">
+                        <i class="fas fa-crown"></i> High Scores
+                </div>
+            <% end %>
+        </li>
+    </ul>
+    <ul class="user-control mr-4">
+        <li class="nav-li">
+            <% if current_user %>
+                <%= link_to "Log Out", logout_path, method: 'delete', class: "btn btn-secondary" %> 
+            <% else %>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-secondary no-flex" data-toggle="dropdown">
+                            Login
+                            <span class="fa-caret" style="vertical-align: middle;"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <%= form_for(:session, url: login_path) do |f| %> 
+                            <div class="login-entry">
+                                <%= f.text_field :username, :placeholder => "User Name", class: "form-control" %>
+                                <%= f.password_field :password, :placeholder => "Password", class: "form-control" %>
+                            </div>
+                            <div class="flex-container">
+                                <%= f.submit "Log in", class: "btn btn-secondary mr-2 ml-2" %>
+                                <p class="tight"> or </p>
+                                <button type="button" class="btn btn-secondary ml-2 mr-2" id="new_user_button" 
+                                    onclick="document.getElementById('new_user_form').style.display='block'">
+                                    Sign Up
+                                </button>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </li>
+    </ul>
+</nav>
+<%= render "layouts/new_user_modal" %>

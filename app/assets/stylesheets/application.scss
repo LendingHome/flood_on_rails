@@ -65,11 +65,44 @@ ul {
 
 .btn {
 	display: inline-flex;
+	text-align: center;
+	.icon {
+		display: inline-block;
+	}
 }
 
 .tight {
 	margin: 0px;
 	padding: 0px;
+}
+
+.no-flex {
+	display: inline-block;
+}
+
+.user-control {
+	display: flex;
+	justify-content: right;
+	align-content: center;
+	float: right;
+}
+
+.login-entry {
+	justify-content: center;
+	margin: 10px;
+}
+
+.nav-li {
+	list-style-type: none;
+}
+
+.dropdown-menu {
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.8);
+	left: auto;
+	justify-content: center;
+	align-content: center;
+	right: 0;
 }
 
 $theme-colors: (
