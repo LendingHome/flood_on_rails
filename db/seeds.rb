@@ -42,3 +42,11 @@ HighScore.create!([
         score: 1 
     },
 ])
+
+User.destroy_all
+
+User.create!({
+    username: 'admin',
+    email: 'none',
+    password: 'admin' 
+})

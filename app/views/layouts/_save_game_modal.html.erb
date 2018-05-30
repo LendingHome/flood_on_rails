@@ -1,0 +1,36 @@
+<div id="save_game_form" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <%= form_for(:saved_game, url: {controller: "game", action: "save"}) do |f| %>
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Save Game</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" onclick="document.getElementById('new_user_form').style.display='none'">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="field form-group"> 
+                    <%= f.label :name %>
+                    <%= f.text_field :name, placeholder: "Name of Saved Game", class: "form-control" %> 
+                </div> 
+                <div class="field form-group"> 
+                    <%= f.label :board_type %>
+                    <%= f.select :board_type, options_for_select({'Starting Board Layout' => 'new',
+                        'Current Board Layout'=>'in_progress'}),{}, {:class => "form-control"} %> 
+                </div>
+                <% if current_user %>
+                    <%= f.hidden_field :owner, :value => current_user.username %>
+                <% end %>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div class="actions"> 
+                <%= f.submit "Save", :class => "btn btn-primary" %> 
+            </div> 
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+        <% end %>
+    </div>
+</div>

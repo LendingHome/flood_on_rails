@@ -5,7 +5,7 @@
 
 
 <body>
-
+    <%= render 'layouts/save_game_modal' %>
     <div id="highscore_form" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>
@@ -62,7 +62,8 @@
                         
                             <% if @game.state == 0 %>    
                             <%= button_to(y, {:controller => "game", :action => "update", :flood_color => y},
-                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", :style => "background-color:#{colorMapper(y)}"} )  %>
+                                {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile",
+                                     :style => "background-color:#{colorMapper(y)}"} )  %>
                             <% else %>
                             <%= button_to(y, {:controller => "game", :action => "update", :flood_color => y},
                                 {:method=>:PUT, :remote => :true, :form_class=> "board-tile", :class => "no-show board-tile", 
@@ -75,13 +76,20 @@
             </div>
             </div>
             <div class="flex-container btn-group mt2">
-                <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
-                
-                <%= form_tag({:controller => "game", :action => "create",:method => :PUT, :remote => :true}, {:id => "size_form", :class=> "btn btn-secondary btn-format"}) do %>
-                <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
-                <%= submit_tag "Submit", :style => "display: none;"%>
+                <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, 
+                    :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
+
+                <%= button_to "Load Game", {:controller => "game", :action => "load", :method=>:PUT, :remote => :true,
+                    :game_id => {id: 4}}, 
+                    :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
+
+                <%= form_tag({:controller => "game", :action => "create",:method => :PUT, :remote => :true}, 
+                    {:id => "size_form", :class=> "btn btn-secondary btn-format"}) do %>
+                    <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
+                    <%= submit_tag "Submit", :style => "display: none;"%>
                 <% end %>
-                
+                <button class="btn btn-secondary btn-format" id="save_game_button" 
+                    onclick="document.getElementById('save_game_form').style.display='block'">Save Game</button>
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </form>
             </div>

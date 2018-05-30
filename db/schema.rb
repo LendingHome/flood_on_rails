@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529175851) do
+ActiveRecord::Schema.define(version: 20180530000420) do
 
   create_table "high_scores", force: :cascade do |t|
     t.string "name"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_games", force: :cascade do |t|
+    t.string "owner"
+    t.string "board"
+    t.string "name"
+    t.string "size"
+    t.string "board_type"
+    t.integer "moves"
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

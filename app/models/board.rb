@@ -13,7 +13,7 @@ class Board
 
 	@current_color = 1;
 
-	def initialize(size)
+	def initialize(size, string_board = nil)
 		case size
 		when 'Small'
 			@board_size = SMALL_BOARD_SIZE
@@ -24,9 +24,30 @@ class Board
 		else
 			@board_size = MEDIUM_BOARD_SIZE
 		end
-		@game_board = Array.new(@board_size) { Array.new(@board_size, 0) }
-		fill_board()
+
+		# Load board
+		if string_board
+			@game_board = Marshal.load(string_board)
+		else
+			@game_board = Array.new(@board_size) { Array.new(@board_size, 0) }
+			fill_board()
+		end
+
+		@initial_board = deep_copy
 		@current_color = @game_board[0][0]
+	end
+
+	def save_board(board_type)
+		if board_type == "in_progress"
+			string_board = Marshal.dump(@game_board)
+		else
+			string_board = Marshal.dump(@initial_board)
+		end
+		string_board
+	end
+
+	def deep_copy
+		Marshal.load(Marshal.dump(@game_board)) unless !(game_board)
 	end
 
 	# flood the board with this color

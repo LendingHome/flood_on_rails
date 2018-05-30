@@ -6,10 +6,13 @@ Rails.application.routes.draw do
   get '/game', to: 'game#index'
   get '/highscores', to: 'high_scores#index'
   get '/computergame', to: 'computer_game#index'
+  get '/savedgames', to: 'saved_page#index'
   
   # Game Routes
   match '/game/update', to: 'game#update', :via => :post
   match '/game/create', to: 'game#create', :via => :post
+  match '/game/save', to: "game#save", :via => :post
+  match '/game/load', to: "game#load", :via => :post
   match '/computergame/update', to: 'computer_game#update', :via => :post
   match '/computergame/create', to: 'computer_game#create', :via => :post
 
@@ -18,7 +21,7 @@ Rails.application.routes.draw do
   post '/highscores/new', to: 'high_scores#new'
 
   # User creation
-  post 'users' => 'users#create'
+  post 'users', to: 'users#create'
   post '/users/new', to: 'users#new'
 
   # Login, logout

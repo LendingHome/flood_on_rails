@@ -35,4 +35,35 @@ class GameController < ApplicationController
     	redirect_to :action => 'index'
     end
 
+
+	def save
+        @saved_game = SavedGame.new(game_params)
+        if @saved_game.save
+            redirect_to '/game'
+        end
+	end
+	
+	def load
+        @game = Game.new(nil,load_params[:id])
+        Rails.cache.write("game", @game)
+    	redirect_to :action => 'index'
+	end
+
+    private
+
+    def game_params
+        filtered_params = params.require(:saved_game).permit(:owner,:name,:board_type)
+        @game = Rails.cache.read("game")
+        filtered_params[:board] = @game.board.save_board(filtered_params[:board_type])
+        unless filtered_params[:type] == 'new'
+			filtered_params[:size] = @game.size
+			filtered_params[:score] = @game.score
+			filtered_params[:moves] = @game.moves_remaining
+        end
+        filtered_params
+    end
+
+    def load_params
+        params.require(:game_id).permit(:id)
+    end
 end
