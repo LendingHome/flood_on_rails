@@ -13,37 +13,31 @@ class Computer_Game
 		@size = size
 	end
 
-	def make_computer_move()
-		color = @comp_board.get_greedy_color()
-		#@greedy_color = color
-		@comp_board.flood(color)
-	end
-
 	def make_user_move(color)
-		@user_board.flood(color)
+		return if !@user_board.flood(color)
 		make_computer_move()
 		determine_state
-
-	end
-
-	
-
-	def determine_state
-		user_done = @user_board.flooded?
-		comp_done = @comp_board.flooded?
-		if user_done 
-			@state = 1
-		elsif comp_done
-			@state = -1
-		else
-			#@state = 0
-		end
-	end
+	end	
 
 	def print_board
 		@user_board.print_board
 		puts
 		@comp_board.print_board
+	end
+
+	private
+
+	def determine_state
+		if @user_board.flooded?
+			@state = 1
+		elsif @comp_board.flooded?
+			@state = -1
+		end
+	end
+
+	def make_computer_move()
+		color = @comp_board.get_greedy_color()
+		@comp_board.flood(color)
 	end
 
 end

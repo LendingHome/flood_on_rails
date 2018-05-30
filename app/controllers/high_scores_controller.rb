@@ -1,12 +1,9 @@
 class HighScoresController < ApplicationController
     
     def index
-        
         @size = params[:size]
         @size = 'Medium' if @size == nil
-    
-        @scores = HighScore.all.where('size = ?', @size).order(:score).reverse_order
-        
+        @scores = HighScore.all.where('size = ?', @size).order(:score).reverse_order 
     end
 
     def new
@@ -16,7 +13,8 @@ class HighScoresController < ApplicationController
     def create
     	@highscore = HighScore.new(highscore_params)
     	# maintain top 10 high scores
-    	HighScore.where('size = ?', @highscore.size).order(:score).reverse_order.last.destroy if HighScore.where('size = ?', @highscore.size).count > 9
+    	HighScore.where('size = ?', @highscore.size).order(:score).reverse_order.last.destroy if 
+            HighScore.where('size = ?', @highscore.size).count > 9
     	if @highscore.save
     		redirect_to highscores_path(:size => @highscore.size)
     	else

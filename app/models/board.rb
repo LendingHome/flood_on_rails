@@ -1,5 +1,3 @@
-require 'set'
-
 class Board
 
 	# read/write
@@ -77,29 +75,6 @@ class Board
 		-1.downto(-6) { |x|
 			return sorted_counts[x][0] if sorted_counts[x][0] != @game_board[0][0] && edge_colors.include?(sorted_counts[x][0])
 		}
-
-		#return sorted_counts[-1][0] if sorted_counts[-1][0] != @game_board[0][0]
-		#sorted_counts[-2][0]
-	end
-
-	def get_edge_colors()
-		edge_colors = Set.new
-		@finished_coords = []
-		edge_colors = get_edge_colors_helper(0, 0, @game_board[0][0], edge_colors)
-
-		edge_colors = edge_colors.delete_if { |x| x.is_a? Set }
-		#edge_colors.delete(nil)
-	end
-
-	def get_edge_colors_helper(x, y, old_color, edge_colors)
-		return @game_board[x][y] if @game_board[x][y] != old_color
-		return nil if @finished_coords.include?([x,y])
-
-		@finished_coords.push([x,y])
-		#edge_colors.add(get_edge_colors_helper(x - 1, y, old_color, edge_colors)) if x - 1 >= 0
-		edge_colors.add(get_edge_colors_helper(x + 1, y, old_color, edge_colors)) if x + 1 < @board_size
-		#edge_colors.add(get_edge_colors_helper(x, y - 1, old_color, edge_colors)) if y - 1 >= 0
-		edge_colors.add(get_edge_colors_helper(x, y + 1, old_color, edge_colors)) if y + 1 < @board_size
 	end
 
 	private
@@ -123,6 +98,30 @@ class Board
 		flood_helper(x + 1, y, old_color, new_color) if x + 1 < @board_size
 		flood_helper(x, y - 1, old_color, new_color) if y - 1 >= 0
 		flood_helper(x, y + 1, old_color, new_color) if y + 1 < @board_size
+	end
+
+	# get colors on the border (so that flooding with this color will expand the flooded space)
+	def get_edge_colors()
+		orig_col = @game_board[0][0]
+		queue = Array.new
+		visited = Array.new
+		edge_colors = Array.new
+		queue.push([0,0])
+
+		while !queue.empty?
+			coords = queue.shift()
+			visited.push(coords)
+			x = coords[0]
+			y = coords[1]
+
+			if @game_board[x][y] != orig_col
+				edge_colors.push(@game_board[x][y]) if !(edge_colors.include?(@game_board[x][y]))
+			else
+				queue.push([x + 1, y]) if x + 1 < @board_size && !(visited.include? [x + 1, y]) && !(queue.include? [x + 1, y])
+				queue.push([x, y + 1]) if y + 1 < @board_size && !(visited.include? [x, y + 1]) && !(queue.include? [x, y + 1])
+			end
+		end
+		edge_colors
 	end
 
 end
