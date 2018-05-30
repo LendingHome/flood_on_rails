@@ -81,10 +81,7 @@
                 <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, 
                     :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
 
-                <%= button_to "Load Game", {:controller => "game", :action => "load", :method=>:PUT, :remote => :true,
-                    :game_id => {id: 4}}, 
-                    :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
-
+                <%= link_to "Load Game", {:controller => "saved_page"}, {:class=>"btn btn-secondary btn-format v-center"} %>
                 <%= form_tag({:controller => "game", :action => "create",:method => :PUT, :remote => :true}, 
                     {:id => "size_form", :class=> "btn btn-secondary btn-format"}) do %>
                     <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>

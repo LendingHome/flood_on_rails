@@ -10,7 +10,19 @@
             <h1 class="title">
                 Saved Games
             </h1>
-        <div class="scores-grid mt2">
+        <div class="saved-games-grid mt2">
+            <p class="title-item">Name of Game</p>
+            <p class="title-item">Owner</p>
+            <p class="title-item">Game State</p>
+            <p class="title-item">Load Game</p>
+            <% @saved_games.each do |g| %>
+                <p class="saved-item middle"> <%= g.name %> </p>
+                <p class="saved-item middle"> <%= g.owner ? g.owner : "Public" %> </p>
+                <p class="saved-item middle"> <%= g.board_type == 'new' ? "New Game" : "In Progress" %> </p>
+                <%= button_to "Load Game", {:controller => "game", :action => "load", :method=>:PUT, :remote => :true,
+                    :game_id => {:id => g.id }}, 
+                    :class=>"btn btn-primary no-back btn-text", :form_class => "saved-item button" %> 
+            <% end %>
         </div>
     </div>
 </div>

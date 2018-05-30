@@ -1,3 +1,43 @@
 // Place all the styles related to the SavedPage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.saved-games-grid {
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 40% 20% 20% 20%;
+	background-color: darkgrey;
+	padding: 10px;
+	border-radius: 10px;
+	width: 70%;
+}
+.saved-item {
+	background-color: darkgray;
+	border: 2px solid #fff;
+	padding: 10px;
+	font-size: 1rem;
+	margin: 0;
+	text-align: center;
+	color: white;
+	margin-bottom: 0;
+}
+
+.saved-item.middle {
+	border-right: none;
+}
+
+.saved-item.button {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.title-item {
+	background-color: darkgray;
+	border: 4px solid #fff;
+	padding: 10px;
+	font-size: 1.25rem;
+	margin: 0;
+	text-align: center;
+	color: #289caf;
+	margin-bottom: 0;
+}
