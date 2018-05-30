@@ -29,6 +29,13 @@
                 </div>
             <% end %>
         </li>
+        <li class="nav-item flex-item tight">
+            <%= link_to controller: "saved_page" do %>
+                <div class="nav-link">
+                        <i class="fas fa-archive"></i> Saved Games
+                </div>
+            <% end %>
+        </li>
     </ul>
     <ul class="user-control mr-4">
         <% if current_user %>
