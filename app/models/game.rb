@@ -21,6 +21,9 @@ class Game
 			@@total_moves = 34
 			@@score_decrement = 27
 		else
+			@@total_moves = 24
+			@@score_decrement = 38
+			@size = "Medium"
 		end
 		@moves_remaining = @@total_moves
 		@score = 1000
@@ -29,7 +32,7 @@ class Game
 	end
 
 	def make_move(color)
-		if @moves_remaining > 1
+		if @moves_remaining > 0
 			return if !@board.flood(color)
 			@moves_remaining -= 1
 			@score -= @@score_decrement

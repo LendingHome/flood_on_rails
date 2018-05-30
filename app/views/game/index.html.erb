@@ -45,7 +45,7 @@
         
             <% if @game.state == 1 %>
                 <h2>You won!</h2>
-                <% if @game.score < @worst_score %>
+                <% if @game.score > @worst_score %>
                     <%= javascript_tag "showForm()" %>
 
                 <% end %>
@@ -79,8 +79,8 @@
                 <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
                 
                 <%= form_tag({:controller => "game", :action => "create",:method => :PUT, :remote => :true}, {:id => "size_form", :class=> "btn btn-secondary btn-format"}) do %>
-                <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
-                <%= submit_tag "Submit", :style => "display: none;"%>
+                    <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
+                    <%= submit_tag "Submit", :style => "display: none;"%>
                 <% end %>
                 
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
@@ -105,6 +105,9 @@
                     <%= f.label :score %>
                     <%= f.text_field :score %> 
                 </div> 
+                <div>
+                    <%= f.hidden_field :size, :value => @game.size %>
+                </div>
                 <div class="actions"> 
                     <%= f.submit "Add High Score" %> 
                 </div> 

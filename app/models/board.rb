@@ -5,7 +5,6 @@ class Board
 	# read/write
 	attr_accessor :game_board
 
-	#BOARD_SIZE = 10
 	SMALL_BOARD_SIZE = 6
 	MEDIUM_BOARD_SIZE = 10
 	LARGE_BOARD_SIZE = 14
@@ -88,8 +87,8 @@ class Board
 		@finished_coords = []
 		edge_colors = get_edge_colors_helper(0, 0, @game_board[0][0], edge_colors)
 
-		#edge_colors.delete_if { |x| x.is_a?(Set) }
-		edge_colors.delete(nil)
+		edge_colors = edge_colors.delete_if { |x| x.is_a? Set }
+		#edge_colors.delete(nil)
 	end
 
 	def get_edge_colors_helper(x, y, old_color, edge_colors)
