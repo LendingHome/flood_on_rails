@@ -10,28 +10,31 @@
         <div class="modal-dialog" role="document">
             <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">New High Score!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" onclick="document.getElementById('highscore_form').style.display='none'">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="field"> 
-                    <%= f.label :name %>
-                    <%= f.text_field :name %> 
-                </div> 
-                <div class="field"> 
-                    <p> Score: <%= @game.score %> </p>
-                    <%= f.text_field :score, {:value => @game.score, :hidden => "hideen"} %> 
-                </div>            
-            </div>
-            <div class="modal-footer">
-                <div class="actions"> 
-                    <%= f.submit "Add High Score", :class => "btn btn-primary" %> 
-                </div> 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">New High Score!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" onclick="document.getElementById('highscore_form').style.display='none'">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="field"> 
+                        <%= f.label :name %>
+                        <%= f.text_field :name %> 
+                    </div> 
+                    <div class="field"> 
+                        <p> Score: <%= @game.score %> </p>
+                        <%= f.text_field :score, {:value => @game.score, :hidden => "hideen"} %> 
+                    </div>  
+                    <div>
+                        <%= f.hidden_field :size, :value => @game.size %>
+                    </div>          
+                </div>
+                <div class="modal-footer">
+                    <div class="actions"> 
+                        <%= f.submit "Add High Score", :class => "btn btn-primary" %> 
+                    </div> 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('highscore_form').style.display='none'">Close</button>
+                </div>
             </div>
             <% end %>
         </div>
@@ -43,6 +46,7 @@
         <div class="flex-grid">
         
             <% if @game.state == 1 %>
+
                 <h2 class="subtitle tight">You won!</h2>
                 <% if @game.score > @worst_score %>
                     <%= javascript_tag "showForm()" %>
@@ -50,8 +54,6 @@
                 <% end %>
             <% elsif @game.state == -1 %>
                 <h2 class="subtitle tight">You Lost</h2>
-            <% else %>
-
             <% end %>
 
             <div class="game-grid-medium" id="game_grid">
@@ -93,10 +95,11 @@
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
                 <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </form>
             </div>
-            <!-- Button to open the modal login form -->
-            <button id="highscore_button" onclick="document.getElementById('highscore_form').style.display='block'">Add High Score</button>
         </div>
+        <!-- Button to open the modal login form -->
+        <button id="highscore_button" onclick="document.getElementById('highscore_form').style.display='block'">Add High Score</button>
     </div>
+
     <script>
         // Set select size value
         var size = "<%= escape_javascript @game.size %>";

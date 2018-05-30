@@ -3,16 +3,19 @@ class GameController < ApplicationController
     	if Rails.cache.exist?("game")
     		@game = Rails.cache.read("game")
     	else
-    		@game = Game.new(params[:size])
+            if params[:size] != nil
+    		      @game = Game.new(params[:size])
+            else
+                @game = Game.new('Medium') 
+            end
     		Rails.cache.write("game", @game)
     	end
-        @worst_score = HighScore.all.order(:score).reverse_order.last.score
+        @worst_score = HighScore.all.where('size = ?', @game.size).order(:score).reverse_order.last.score
         @highscore = HighScore.new
     	
     end
 
     def create
-        #Rails.logger.debug(params[:size])
 
         # if size was not sent, get the size of the last board
         if params[:size] == nil
@@ -22,7 +25,6 @@ class GameController < ApplicationController
         end
 
     	@game = Game.new(params[:size])
-        #Rails.logger.debug(@game.board.game_board.inspect)
     	Rails.cache.write("game", @game)
     	redirect_to :action => 'index'
     end

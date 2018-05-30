@@ -4,17 +4,41 @@
 </header>
 
 <body>
+
     <div class="content-box">
     <br />
         <div align='center'>
             <h1 class="title">
                 High Scores!
             </h1>
-        <div class="scores-grid mt2">
-        <% @scores.each do |hs| %>
-            <p class="score-item"> <%= hs.name %> </p>
-            <p class="score-item"> <%= hs.score %> </p>
-        <% end %>
+
+            <%= form_tag({:controller => "high_scores", :action => "index", :remote => :true}, {:method => :GET, :id => "size_selector", :class=> "btn btn-secondary btn-format"}) do %>
+                <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
+                <%= submit_tag "Submit", :style => "display: none;"%>
+            <% end %>
+
+            <div class="scores-grid mt2">
+                <% @scores.each do |hs| %>
+                    <p class="score-item"> <%= hs.name %> </p>
+                    <p class="score-item"> <%= hs.score %> </p>
+                <% end %>
+            </div>
         </div>
     </div>
-</div>
+
+    <script>
+
+        // Set select size value
+        var size = "<%= @size %>";
+        if (size === "") {
+            size = "Medium"
+        }
+        document.getElementById('size').value = size;
+
+        function change_size() {
+            document.getElementById("size_selector").submit();
+        }
+
+    </script>
+
+</body>
