@@ -65,11 +65,51 @@ ul {
 
 .btn {
 	display: inline-flex;
+	text-align: center;
+	.icon {
+		display: inline-block;
+	}
 }
 
 .tight {
 	margin: 0px;
 	padding: 0px;
+}
+
+.no-flex {
+	display: inline-block;
+}
+
+.user-control {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	float: right;
+	flex-flow: row nowrap;
+	margin: 0;
+}
+
+.login-entry {
+	justify-content: center;
+	margin: 10px;
+}
+
+.form-group {
+	text-align: left;
+}
+
+.nav-li {
+	list-style-type: none;
+	align-items: center;
+}
+
+.dropdown-menu {
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.8);
+	left: auto;
+	justify-content: center;
+	align-content: center;
+	right: 0;
 }
 
 $theme-colors: (

@@ -1,42 +1,44 @@
 <header>
-    <title> RailsFlood | Home </title>
-    <nav class="navbar navbar-expand-lg bg-dark">
-        <a class="navbar-brand" href="/">Flood on Rails!</a>
-        <ul class="nav-container">
-            <li class="nav-item flex-item tight">
-                <%= link_to controller: 'landing_page' do %>
-                    <div class="btn-quiet nav-link">
-                        <i class="fas fa-home"></i> Home
-                    </div>
-                <% end %>
-            </li>
-            <li class="nav-item flex-item tight">
-                <%= link_to controller: 'game' do %>
-                    <div class="nav-link">
-                        <i class="fas fa-th"></i> FloodIt!
-                    </div>
-                <% end %>
-            </li>
-            <li class="nav-item flex-item tight">
-                <%= link_to controller: 'computer_game' do %>
-                    <div class="nav-link">
-                        <i class="fas fa-desktop"></i> Play Computer
-                    </div>
-                <% end %>
-            </li>
-            <li class="nav-item flex-item tight">
-                <%= link_to controller: 'high_scores' do %>
-                    <div class="nav-link">
-                         <i class="fas fa-crown"></i> High Scores
-                    </div>
-                <% end %>
-            </li>
-        </ul>
-    </nav>
+    <title> RailsFlood | Game </title>
+    <%= render 'layouts/navbar' %>
 </header>
 
 
 <body>
+
+    <div id="highscore_form" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New High Score!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" onclick="document.getElementById('highscore_form').style.display='none'">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="field"> 
+                    <%= f.label :name %>
+                    <%= f.text_field :name %> 
+                </div> 
+                <div class="field"> 
+                    <p> Score: <%= @game.score %> </p>
+                    <%= f.text_field :score, {:value => @game.score, :hidden => "hideen"} %> 
+                </div>  
+                <div>
+                    <%= f.hidden_field :size, :value => @game.size %>
+                </div>          
+            </div>
+            <div class="modal-footer">
+                <div class="actions"> 
+                    <%= f.submit "Add High Score", :class => "btn btn-primary" %> 
+                </div> 
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
 
     <div class="content-box">
         <br />
@@ -44,13 +46,14 @@
         <div class="flex-grid">
         
             <% if @game.state == 1 %>
-                <h2>You won!</h2>
+
+                <h2 class="subtitle tight">You won!</h2>
                 <% if @game.score > @worst_score %>
                     <%= javascript_tag "showForm()" %>
 
                 <% end %>
             <% elsif @game.state == -1 %>
-                <h2>You Lost</h2>
+                <h2 class="subtitle tight">You Lost</h2>
             <% else %>
 
             <% end %>
@@ -88,30 +91,6 @@
             </div>
             <!-- Button to open the modal login form -->
             <button id="highscore_button" onclick="document.getElementById('highscore_form').style.display='block'">Add High Score</button>
-
-            <!-- The Modal -->
-            <div id="highscore_form" class="modal">
-            <span onclick="document.getElementById('highscore_form').style.display='none'" 
-            class="close" title="Close Modal">&times;</span>
-
-            <!-- Modal Content -->
-            <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}, :html => {:class => "modal-content"}) do |f| %> 
-                <p>Congratulations, you made a new high score!</p> 
-                <div class="field"> 
-                    <%= f.label :name %>
-                    <%= f.text_field :name %> 
-                </div> 
-                <div class="field"> 
-                    <%= f.label :score %>
-                    <%= f.text_field :score %> 
-                </div> 
-                <div>
-                    <%= f.hidden_field :size, :value => @game.size %>
-                </div>
-                <div class="actions"> 
-                    <%= f.submit "Add High Score" %> 
-                </div> 
-            <% end %>
         </div>
     </div>
     <script>
