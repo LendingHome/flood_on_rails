@@ -9,8 +9,13 @@ class GameController < ApplicationController
                 @game = Game.new('Medium') 
             end
     		Rails.cache.write("game", @game)
-    	end
-        @worst_score = HighScore.all.where('size = ?', @game.size).order(:score).reverse_order.last.score
+        end
+        scores = HighScore.all.where('size = ?', @game.size)
+        if scores.count > 9
+            @worst_score = scores.order(:score).first.score
+        else
+            @worst_score = 0
+        end
         @highscore = HighScore.new
     	
     end

@@ -3,9 +3,9 @@
     <%= render 'layouts/navbar' %>
 </header>
 
+<%= render 'layouts/save_game_modal' %>
 
 <body>
-    <%= render 'layouts/save_game_modal' %>
     <div id="highscore_form" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <%= form_for(@highscore, url: {controller: "high_scores", action: "create"}) do |f| %>
@@ -42,20 +42,28 @@
 
     <div class="content-box">
         <br />
-        <h1 class="title center"> FloodIt!</h1>
-        <div class="flex-grid">
         
-            <% if @game.state == 1 %>
+        <div class="flex-grid">
 
-                <h2 class="subtitle tight">You won!</h2>
-                <% if @game.score > @worst_score %>
-                    <%= javascript_tag "showForm()" %>
+        </div>
+            <div class="flex-container btn-group mt2">
+                <button class="btn btn-secondary btn-format no-click">
+                    <% if @game.state == 1 %>
+                        <h2 class="subtitle tight">You won!</h2>
+                        <% if @game.score > @worst_score %>
+                            <%= javascript_tag "showForm()" %>
 
-                <% end %>
-            <% elsif @game.state == -1 %>
-                <h2 class="subtitle tight">You Lost</h2>
-            <% end %>
-
+                        <% end %>
+                    <% elsif @game.state == -1 %>
+                        <h2 class="subtitle tight">You Lost</h2>
+                    <% else %>
+                        <h1 class="title center"> FloodIt!</h1>
+                    <% end %>
+                </button>
+                <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </button>
+                <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </button>
+            </div>
+        <div class="flex-grid">
             <div class="game-grid-medium" id="game_grid">
                 
                 <% @game.board.game_board.each do |x| %>
@@ -80,17 +88,22 @@
             <div class="flex-container btn-group mt2">
                 <%= button_to "New Game", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true}, 
                     :class=>"no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
-
-                <%= link_to "Load Game", {:controller => "saved_page"}, {:class=>"btn btn-secondary btn-format v-center"} %>
-                <%= form_tag({:controller => "game", :action => "create",:method => :PUT, :remote => :true}, 
-                    {:id => "size_form", :class=> "btn btn-secondary btn-format"}) do %>
-                    <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
-                    <%= submit_tag "Submit", :style => "display: none;"%>
-                <% end %>
                 <button class="btn btn-secondary btn-format" id="save_game_button" 
                     onclick="document.getElementById('save_game_form').style.display='block'">Save Game</button>
-                <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Moves Remaining: <%= @game.moves_remaining %> </p> </form>
-                <button class="btn btn-secondary btn-format" disabled> <p class="btn-text"> Score: <%= @game.score %> </p> </form>
+                <%= link_to "Load Game", {:controller => "saved_page"}, {:class=>"btn btn-secondary btn-format v-center"} %>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= @game.size %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <%= button_to "Small", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true, :size => "Small"}, 
+                        :class=>"dropdown-item", :form_class => "dropdown-item" %>
+                    <%= button_to "Medium", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true, :size => "Medium"}, 
+                        :class=>"dropdown-item", :form_class => "dropdown-item" %>
+                    <%= button_to "Large", {:controller => "game", :action => "create", :method=>:PUT, :remote => :true, :size => "Large"}, 
+                        :class=>"dropdown-item", :form_class => "dropdown-item" %>
+                </div>
+
             </div>
         </div>
         <!-- Button to open the modal login form -->
@@ -103,7 +116,6 @@
         if (size === "") {
             size = "Medium"
         }
-        document.getElementById('size').value = size;
 
         // Set board display
         var board = document.getElementById('game_grid');

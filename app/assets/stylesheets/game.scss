@@ -21,8 +21,8 @@
 
 .game-grid-small {
 	display: grid;
-	grid-template-columns: repeat(6, 6vw);
-	grid-template-rows: repeat(6, 6vw);
+	grid-template-columns: repeat(6, 6vmin);
+	grid-template-rows: repeat(6, 6vmin);
 	grid-row-gap: 0px;
 	grid-column-gap: 0px;
 
@@ -32,16 +32,16 @@
 	outline-color: #256599;
 	outline-style: groove;
 
-	width: 36vw;
-	height: 36vw;
+	width: 36vmin;
+	height: 36vmin;
 	margin: 0 auto;
 	margin-top: 2vh;
 }
 
 .game-grid-medium {
 	display: grid;
-	grid-template-columns: repeat(10, 5vw);
-	grid-template-rows: repeat(10, 5vw);
+	grid-template-columns: repeat(10, 5vmin);
+	grid-template-rows: repeat(10, 5vmin);
 	grid-row-gap: 0px;
 	grid-column-gap: 0px;
 
@@ -51,16 +51,16 @@
 	outline-color: #256599;
 	outline-style: groove;
 
-	width: 50vw;
-	height: 50vw;
+	width: 50vmin;
+	height: 50vmin;
 	margin: 0 auto;
 	margin-top: 2vh;
 }
 
 .game-grid-large {
 	display: grid;
-	grid-template-columns: repeat(14, 5vw);
-	grid-template-rows: repeat(14, 5vw);
+	grid-template-columns: repeat(14, 5vmin);
+	grid-template-rows: repeat(14, 5vmin);
 	grid-row-gap: 0px;
 	grid-column-gap: 0px;
 
@@ -70,8 +70,8 @@
 	outline-color: #256599;
 	outline-style: groove;
 
-	width: 70vw;
-	height: 70vw;
+	width: 70vmin;
+	height: 70vmin;
 	margin: 0 auto;
 	margin-top: 2vh;
 }
@@ -103,7 +103,7 @@
 
 div.btn-group {
 	margin: 0 -5px auto;
-	margin-top: 2vh;
+	margin-top: 2vmin;
 	text-align: center;
 	width: inherit;
 	justify-content: center;
@@ -120,6 +120,10 @@ div.btn-group {
 		margin-right: -2px;
 		border-color: white;
 	}
+}
+
+.no-click {
+	pointer-events: none;
 }
 
 .full-size {

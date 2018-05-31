@@ -76,10 +76,18 @@
         <div class="flex-container btn-group mt2">
                 <%= button_to "New Game", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true}, :class => "no-back btn-text", :form_class => "btn btn-secondary btn-format v-center" %>
 
-                <%= form_tag({:controller => "computer_game", :action => "create",:method => :PUT, :remote => :true}, {:id => "size_form", :class => "btn btn-secondary btn-format"}) do %>
-                <%= select_tag :size, options_for_select([ "Small", "Medium", "Large" ], "Medium"), :onchange => 'change_size()' %>
-                <%= submit_tag "Submit", :style => "display: none;"%>
-                <% end %>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= @game.size %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <%= button_to "Small", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true, :size => "Small"}, 
+                        :class=>"dropdown-item", :form_class => "dropdown-item" %>
+                    <%= button_to "Medium", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true, :size => "Medium"}, 
+                        :class=>"dropdown-item", :form_class => "dropdown-item" %>
+                    <%= button_to "Large", {:controller => "computer_game", :action => "create", :method=>:PUT, :remote => :true, :size => "Large"}, 
+                        :class=>"dropdown-item", :form_class => "dropdown-item" %>
+                </div>
 
             </div>
 
@@ -92,7 +100,6 @@
         if (size === "") {
             size = "Medium"
         }
-        document.getElementById('size').value = size;
 
         // Set board display
         var board_u = document.getElementById('game_grid_comp_u');
